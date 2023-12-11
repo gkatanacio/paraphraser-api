@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  go-custom:
+    build:
+      context: .
+      dockerfile: Dockerfile.golang
+    image: go-custom
+    volumes:
+      - .:/code:cached
+    working_dir: /code
+    env_file: .env
+    environment:
+      - GOPATH=/code/.go
+
+  serverless:
+    image: amaysim/serverless:3.35.2
+    volumes:
+      - .:/app:cached
+    working_dir: /app
+    env_file: .env
+
+  mockery:
+    image: vektra/mockery:v2.36
+    volumes:
+      - .:/code:cached
+    working_dir: /code

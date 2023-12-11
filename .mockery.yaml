@@ -1,0 +1,9 @@
+# https://vektra.github.io/mockery/latest/configuration/
+with-expecter: True
+inpackage: True
+dir: "{{.InterfaceDir}}"
+all: True
+packages:
+  github.com/gkatanacio/go-serverless-template/pkg/greeting:
+    config:
+      recursive: True

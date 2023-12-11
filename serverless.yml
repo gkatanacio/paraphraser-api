@@ -1,0 +1,28 @@
+service: go-serverless-template
+
+frameworkVersion: "3"
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: provided.al2
+  architecture: arm64
+  deploymentBucket:
+    name: ${env:AWS_DEPLOYMENT_BUCKET}
+  stage: ${env:STAGE}
+  region: ${env:AWS_REGION}
+
+functions:
+  hello:
+    package:
+      artifact: bin/hello.zip
+    handler: bootstrap
+    timeout: 30
+    memorySize: 128
+    events:
+      - schedule:
+          rate: ${env:RUN_FREQUENCY}
+    environment:
+      GREET_WHO: ${env:GREET_WHO}
