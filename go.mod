@@ -1,9 +1,11 @@
-module github.com/gkatanacio/go-serverless-template
+module github.com/gkatanacio/paraphraser-api
 
 go 1.21
 
 require (
 	github.com/aws/aws-lambda-go v1.41.0
+	github.com/kelseyhightower/envconfig v1.4.0
+	github.com/sashabaranov/go-openai v1.17.9
 	github.com/stretchr/testify v1.7.2
 )
 

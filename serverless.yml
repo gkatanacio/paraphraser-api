@@ -1,4 +1,4 @@
-service: go-serverless-template
+service: paraphraser-api
 
 frameworkVersion: "3"
 
@@ -13,16 +13,33 @@ provider:
     name: ${env:AWS_DEPLOYMENT_BUCKET}
   stage: ${env:STAGE}
   region: ${env:AWS_REGION}
+  httpApi:
+    cors: true
+    authorizers:
+      customAuthorizer:
+        type: request
+        enableSimpleResponses: true
+        functionName: authPassthrough # can be replaced with proper authorizer function
 
 functions:
-  hello:
+  authPassthrough:
     package:
-      artifact: bin/hello.zip
+      artifact: bin/auth-passthrough.zip
     handler: bootstrap
-    timeout: 30
+
+  paraphrase:
+    package:
+      artifact: bin/paraphrase.zip
+    handler: bootstrap
+    timeout: 20
     memorySize: 128
     events:
-      - schedule:
-          rate: ${env:RUN_FREQUENCY}
+      - httpApi:
+          method: post
+          path: /paraphrase
+          authorizer:
+            name: customAuthorizer
     environment:
-      GREET_WHO: ${env:GREET_WHO}
+      PARAPHRASE_TIMEOUT: ${env:PARAPHRASE_TIMEOUT}
+      CHATGPT_API_KEY: ${env:CHATGPT_API_KEY}
+      CHATGPT_TEMPERATURE: ${env:CHATGPT_TEMPERATURE}

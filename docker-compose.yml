@@ -14,14 +14,14 @@ services:
       - GOPATH=/code/.go
 
   serverless:
-    image: amaysim/serverless:3.35.2
+    image: amaysim/serverless:3.36.0
     volumes:
       - .:/app:cached
     working_dir: /app
     env_file: .env
 
   mockery:
-    image: vektra/mockery:v2.36
+    image: vektra/mockery:v2.38
     volumes:
       - .:/code:cached
     working_dir: /code

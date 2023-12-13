@@ -1,12 +1,35 @@
-# go-serverless-template
+# paraphraser-api
 
-Template for golang serverless applications.
+Backend for paraphrasing tool leveraging LLM APIs.
 
-Since this tries to follow the [3 Musketeers](https://3musketeersdev.netlify.app) methodology, the following are heavily used:
+Implemented as an AWS Lambda application and utilizes Serverless Framework for deployment.
 
-- Docker
-- Docker Compose
-- Make
+## Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Make](https://www.gnu.org/software/make/)
+
+## Endpoints
+
+- POST /paraphrase
+  - available providers: "chatgpt"
+  - available tones: "formal", "amicable", "fun", "casual", "sympathetic", "persuasive"
+  - sample request:
+    ```
+    POST /paraphrase
+    {
+        "provider": "chatgpt",
+        "tone": "formal",
+        "text": "I'm hungry. What's for dinner?"
+    }
+    ```
+  - sample response:
+    ```
+    {
+        "result": "I am currently experiencing hunger. May I inquire about the menu for this evening's meal?"
+    }
+    ```
 
 ## Usage
 
@@ -17,8 +40,6 @@ $ make .env
 ```
 
 - see generated `.env` file for configuration
-
-**Note:** For deployment via CI/CD, `CICD_MODE` environment variable should be set to `true` in the build server. All configuration should also be set in the build server's environment variables. They will automatically be used if `.env` is generated from `.env.cicd`.
 
 #### tidy dependencies
 
@@ -38,6 +59,8 @@ $ make test
 $ make build
 ```
 
+- this generates `bin` directory to be used in deployment
+
 #### deploy serverless application
 
 ```bash
@@ -55,7 +78,7 @@ $ make fmt
 #### generate test mocks (to be used with [stretchr/testify](https://github.com/stretchr/testify)) for all interfaces in project
 
 ```bash
-$ make genMocks
+$ make mocks
 ```
 
 - can be configured in `.mockery.yaml`

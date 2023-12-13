@@ -1,11 +1,5 @@
-ifeq ($(CICD_MODE),true)
-	ENVFILE_BASE=.env.cicd
-else
-	ENVFILE_BASE=.env.example
-endif
-
 .env:
-	cp $(ENVFILE_BASE) .env
+	cp .env.example .env
 
 .PHONY: deps
 deps: .env
@@ -36,6 +30,6 @@ deploy: .env bin
 fmt: .env
 	docker compose run --rm go-custom go fmt ./...
 
-.PHONY: genMocks
-genMocks: .env
+.PHONY: mocks
+mocks: .env
 	docker compose run --rm mockery
