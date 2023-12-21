@@ -2,7 +2,7 @@
 
 Backend for paraphrasing tool leveraging LLM APIs.
 
-Implemented as an AWS Lambda application and utilizes Serverless Framework for deployment.
+Implemented as an [AWS Lambda application](https://docs.aws.amazon.com/lambda/latest/dg/deploying-lambda-apps.html) and utilizes [Serverless Framework](https://www.serverless.com) for deployment.
 
 ## Prerequisites
 
