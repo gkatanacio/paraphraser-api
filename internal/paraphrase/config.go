@@ -8,7 +8,7 @@ import (
 
 // Config contains the configuration for the Paraphrase Service.
 type Config struct {
-	Timeout time.Duration `envconfig:"PARAPHRASE_TIMEOUT" default:"5000ms"`
+	Timeout time.Duration `envconfig:"PARAPHRASE_TIMEOUT" default:"15s"`
 }
 
 // ConfigFromEnv loads the configuration from the environment variables.
