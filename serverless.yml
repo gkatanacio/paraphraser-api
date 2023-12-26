@@ -28,6 +28,28 @@ functions:
       artifact: bin/auth-passthrough.zip
     handler: bootstrap
 
+  getProviders:
+    package:
+      artifact: bin/get-providers.zip
+    handler: bootstrap
+    timeout: 5
+    memorySize: 128
+    events:
+      - httpApi:
+          method: get
+          path: /providers
+
+  getTones:
+    package:
+      artifact: bin/get-tones.zip
+    handler: bootstrap
+    timeout: 5
+    memorySize: 128
+    events:
+      - httpApi:
+          method: get
+          path: /tones
+
   paraphrase:
     package:
       artifact: bin/paraphrase.zip

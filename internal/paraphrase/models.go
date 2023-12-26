@@ -11,11 +11,9 @@ type Provider string
 const (
 	ChatGpt Provider = "chatgpt"
 	Gemini  Provider = "gemini"
-	Grok    Provider = "grok"
 )
 
-// var availableProviders = []Provider{ChatGpt, Provider, Grok}
-var availableProviders = []Provider{ChatGpt, Gemini} // Grok not yet available
+var AvailableProviders = []Provider{ChatGpt, Gemini}
 
 // Tone is the type for representing possible paraphrasing tones.
 type Tone string
@@ -29,7 +27,7 @@ const (
 	Persuasive  Tone = "persuasive"
 )
 
-var availableTones = []Tone{Formal, Amicable, Fun, Casual, Sympathetic, Persuasive}
+var AvailableTones = []Tone{Formal, Amicable, Fun, Casual, Sympathetic, Persuasive}
 
 var (
 	ErrInvalidProvider = errors.New("invalid value for provider")
@@ -46,11 +44,11 @@ type Payload struct {
 
 // Validate throws an error if the Payload is invalid.
 func (p *Payload) Validate() error {
-	if slices.Index(availableProviders, p.Provider) == -1 {
+	if slices.Index(AvailableProviders, p.Provider) == -1 {
 		return ErrInvalidProvider
 	}
 
-	if slices.Index(availableTones, p.Tone) == -1 {
+	if slices.Index(AvailableTones, p.Tone) == -1 {
 		return ErrInvalidTone
 	}
 
