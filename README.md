@@ -13,7 +13,7 @@ Implemented as an [AWS Lambda application](https://docs.aws.amazon.com/lambda/la
 ## Endpoints
 
 - POST /paraphrase
-  - available providers: "chatgpt"
+  - available providers: "chatgpt", "gemini"
   - available tones: "formal", "amicable", "fun", "casual", "sympathetic", "persuasive"
   - sample request:
     ```
