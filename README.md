@@ -47,10 +47,16 @@ $ make .env
 $ make deps
 ```
 
-#### run tests
+#### run unit tests
 
 ```bash
 $ make test
+```
+
+#### run all tests (unit + integration tests)
+
+```bash
+$ make testIncludeInt
 ```
 
 #### build serverless functions

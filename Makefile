@@ -9,6 +9,10 @@ deps: .env
 test: .env
 	docker compose run --rm go-custom go test -v ./...
 
+.PHONY: testIncludeInt
+testIncludeInt: .env
+	docker compose run --rm -e INTEGRATION=true go-custom go test -v ./...
+
 .PHONY: build
 build: .env
 	docker compose run --rm go-custom make _build
