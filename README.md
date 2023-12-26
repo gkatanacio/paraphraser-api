@@ -12,12 +12,12 @@ Implemented as an [AWS Lambda application](https://docs.aws.amazon.com/lambda/la
 
 ## Endpoints
 
-- POST /paraphrase
+- `POST /paraphrase`
+
   - available providers: "chatgpt", "gemini"
   - available tones: "formal", "amicable", "fun", "casual", "sympathetic", "persuasive"
   - sample request:
     ```
-    POST /paraphrase
     {
         "provider": "chatgpt",
         "tone": "formal",
@@ -28,6 +28,34 @@ Implemented as an [AWS Lambda application](https://docs.aws.amazon.com/lambda/la
     ```
     {
         "result": "I am currently experiencing hunger. May I inquire about the menu for this evening's meal?"
+    }
+    ```
+
+- `GET /providers`
+
+  - sample response:
+    ```
+    {
+        "providers": [
+            "chatgpt",
+            "gemini"
+        ]
+    }
+    ```
+
+- `GET /tones`
+
+  - sample response:
+    ```
+    {
+        "tones": [
+            "formal",
+            "amicable",
+            "fun",
+            "casual",
+            "sympathetic",
+            "persuasive"
+        ]
     }
     ```
 
