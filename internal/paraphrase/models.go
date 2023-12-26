@@ -10,12 +10,12 @@ type Provider string
 
 const (
 	ChatGpt Provider = "chatgpt"
-	Bard    Provider = "bard"
+	Gemini  Provider = "gemini"
 	Grok    Provider = "grok"
 )
 
-// var availableProviders = []Provider{ChatGpt, Bard, Grok}
-var availableProviders = []Provider{ChatGpt} // only ChatGpt is available for now
+// var availableProviders = []Provider{ChatGpt, Provider, Grok}
+var availableProviders = []Provider{ChatGpt, Gemini} // Grok not yet available
 
 // Tone is the type for representing possible paraphrasing tones.
 type Tone string

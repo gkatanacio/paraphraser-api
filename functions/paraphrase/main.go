@@ -13,6 +13,7 @@ import (
 	"github.com/gkatanacio/paraphraser-api/internal/errs"
 	"github.com/gkatanacio/paraphraser-api/internal/handler"
 	"github.com/gkatanacio/paraphraser-api/internal/llm/chatgpt"
+	"github.com/gkatanacio/paraphraser-api/internal/llm/gemini"
 	"github.com/gkatanacio/paraphraser-api/internal/paraphrase"
 )
 
@@ -23,6 +24,7 @@ func init() {
 		paraphrase.ConfigFromEnv(),
 		map[paraphrase.Provider]paraphrase.Paraphraser{
 			paraphrase.ChatGpt: chatgpt.NewClient(chatgpt.ConfigFromEnv()),
+			paraphrase.Gemini:  gemini.NewClient(gemini.ConfigFromEnv()),
 		},
 	)
 }
