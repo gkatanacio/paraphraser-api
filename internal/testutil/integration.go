@@ -5,8 +5,8 @@ import (
 	"testing"
 )
 
-// IntegrationTest can be called at the start of a particular test to mark it
-// as an integration test. Integration tests are are skipped unless the
+// IntegrationTest can be called at the start of a particular test to mark
+// it as an integration test. Integration tests are skipped unless the
 // environment variable INTEGRATION is set to true.
 func IntegrationTest(t *testing.T) {
 	t.Helper()
