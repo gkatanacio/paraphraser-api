@@ -45,7 +45,9 @@ func (c *Client) Paraphrase(ctx context.Context, tone string, text string) (stri
 
 func buildParaphrasePrompt(tone string, text string) string {
 	return strings.TrimSpace(fmt.Sprintf(`
-	Paraphrase the following text to sound more %s. Only include the actual paraphrased text without surrounding quotes in the response.
+	Paraphrase the following text to sound more %s.
+	Only include the actual paraphrased text without surrounding quotes in the response.
+	Try to keep the structure similar to that of the original text.
 	Text: %s
 	`, tone, text))
 }
