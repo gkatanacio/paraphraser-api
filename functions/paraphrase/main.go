@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"log/slog"
+	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -49,7 +50,7 @@ func handle(ctx context.Context, request *events.APIGatewayV2HTTPRequest) (*even
 		return handler.ErrorResponse(errors.New("failed to paraphrase text"))
 	}
 
-	return handler.JsonResponse(map[string]string{"result": result}, 200)
+	return handler.JsonResponse(http.StatusOK, map[string]string{"result": result})
 }
 
 func main() {

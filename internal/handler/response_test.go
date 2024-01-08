@@ -34,7 +34,7 @@ func Test_JsonResponse(t *testing.T) {
 
 	for name, tc := range testCases {
 		t.Run(name, func(t *testing.T) {
-			response, err := handler.JsonResponse(tc.data, tc.statusCode)
+			response, err := handler.JsonResponse(tc.statusCode, tc.data)
 			assert.NoError(t, err)
 			assert.Equal(t, tc.wantBody, response.Body)
 			assert.Equal(t, tc.statusCode, response.StatusCode)

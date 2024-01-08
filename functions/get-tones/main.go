@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -11,7 +12,7 @@ import (
 )
 
 func handle(ctx context.Context) (*events.APIGatewayV2HTTPResponse, error) {
-	return handler.JsonResponse(map[string][]paraphrase.Tone{"tones": paraphrase.AvailableTones}, 200)
+	return handler.JsonResponse(http.StatusOK, map[string][]paraphrase.Tone{"tones": paraphrase.AvailableTones})
 }
 
 func main() {
