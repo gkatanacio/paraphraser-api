@@ -11,7 +11,7 @@ import (
 )
 
 // JsonResponse builds the API Gateway Lambda response in JSON format.
-func JsonResponse(statusCode int, data interface{}) (*events.APIGatewayV2HTTPResponse, error) {
+func JsonResponse(statusCode int, data any) (*events.APIGatewayV2HTTPResponse, error) {
 	b, err := json.Marshal(data)
 	if err != nil {
 		return nil, err
