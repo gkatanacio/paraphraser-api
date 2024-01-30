@@ -62,8 +62,8 @@ func Test_Payload_Validate(t *testing.T) {
 		},
 	}
 
-	for name, tc := range testCases {
-		t.Run(name, func(t *testing.T) {
+	for scenario, tc := range testCases {
+		t.Run(scenario, func(t *testing.T) {
 			assert.Equal(t, tc.wantErr, tc.payload.Validate())
 		})
 	}
