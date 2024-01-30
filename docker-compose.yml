@@ -21,7 +21,7 @@ services:
     env_file: .env
 
   mockery:
-    image: vektra/mockery:v2.38
+    image: vektra/mockery:v2
     volumes:
       - .:/code:cached
     working_dir: /code
