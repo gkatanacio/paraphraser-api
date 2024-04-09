@@ -34,7 +34,7 @@ func (c *Client) Paraphrase(ctx context.Context, tone string, text string) (stri
 		return "", err
 	}
 
-	if resp.PromptFeedback.BlockReason > 0 {
+	if resp.PromptFeedback != nil && resp.PromptFeedback.BlockReason > 0 {
 		return "", fmt.Errorf("prompt was blocked: %s", resp.PromptFeedback.BlockReason)
 	}
 
