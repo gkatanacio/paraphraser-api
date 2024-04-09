@@ -1,10 +1,10 @@
 module github.com/gkatanacio/paraphraser-api
 
-go 1.21
+go 1.22
 
 require (
 	github.com/aws/aws-lambda-go v1.41.0
-	github.com/google/generative-ai-go v0.5.0
+	github.com/google/generative-ai-go v0.10.0
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/sashabaranov/go-openai v1.17.9
 	github.com/stretchr/testify v1.8.1
@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	cloud.google.com/go v0.110.8 // indirect
 	cloud.google.com/go/ai v0.3.0 // indirect
 	cloud.google.com/go/compute v1.23.1 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
