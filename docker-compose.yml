@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   go-custom:
     build:
@@ -14,7 +12,7 @@ services:
       - GOPATH=/code/.go
 
   serverless:
-    image: amaysim/serverless:3.36.0
+    image: amaysim/serverless:3.39.0
     volumes:
       - .:/app:cached
     working_dir: /app
