@@ -3,6 +3,7 @@ package paraphrase
 import (
 	"context"
 	"errors"
+	"fmt"
 )
 
 var (
@@ -39,5 +40,10 @@ func (s *Service) Paraphrase(ctx context.Context, provider Provider, tone Tone, 
 		return "", ErrNoConfiguredParaphraser
 	}
 
-	return paraphraser.Paraphrase(ctx, string(tone), text)
+	result, err := paraphraser.Paraphrase(ctx, string(tone), text)
+	if err != nil {
+		return "", fmt.Errorf("paraphrase provider: %w", err)
+	}
+
+	return result, nil
 }

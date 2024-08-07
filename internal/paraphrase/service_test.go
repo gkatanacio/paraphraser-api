@@ -66,5 +66,5 @@ func Test_Service_Paraphrase_ParaphraserError(t *testing.T) {
 
 	_, err := service.Paraphrase(context.Background(), testProvider, paraphrase.Formal, "Hello world")
 
-	assert.Equal(t, testErr, err)
+	assert.ErrorIs(t, err, testErr)
 }

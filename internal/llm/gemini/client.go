@@ -31,7 +31,7 @@ func NewClient(cfg *Config) *Client {
 func (c *Client) Paraphrase(ctx context.Context, tone string, text string) (string, error) {
 	resp, err := c.genModel.GenerateContent(ctx, genai.Text(buildParaphrasePrompt(tone, text)))
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("gemini generate content: %w", err)
 	}
 
 	if resp.PromptFeedback != nil && resp.PromptFeedback.BlockReason > 0 {

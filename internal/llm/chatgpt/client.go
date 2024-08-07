@@ -38,7 +38,7 @@ func (c *Client) Paraphrase(ctx context.Context, tone string, text string) (stri
 		},
 	)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("chatgpt chat completion: %w", err)
 	}
 
 	return resp.Choices[0].Message.Content, nil
