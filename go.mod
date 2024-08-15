@@ -1,6 +1,6 @@
 module github.com/gkatanacio/paraphraser-api
 
-go 1.22
+go 1.23
 
 require (
 	github.com/aws/aws-lambda-go v1.41.0
