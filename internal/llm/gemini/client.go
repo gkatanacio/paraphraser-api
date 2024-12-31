@@ -20,7 +20,7 @@ func NewClient(cfg *Config) *Client {
 	if err != nil {
 		log.Fatal(err)
 	}
-	genModel := genAiClient.GenerativeModel("gemini-pro")
+	genModel := genAiClient.GenerativeModel("gemini-1.5-flash")
 	genModel.SetTemperature(cfg.Temperature)
 
 	return &Client{genModel: genModel}

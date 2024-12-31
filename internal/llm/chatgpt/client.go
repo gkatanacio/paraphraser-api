@@ -27,7 +27,7 @@ func (c *Client) Paraphrase(ctx context.Context, tone string, text string) (stri
 	resp, err := c.openAiClient.CreateChatCompletion(
 		ctx,
 		openai.ChatCompletionRequest{
-			Model: openai.GPT3Dot5Turbo,
+			Model: openai.GPT4oMini,
 			Messages: []openai.ChatCompletionMessage{
 				{
 					Role:    openai.ChatMessageRoleUser,

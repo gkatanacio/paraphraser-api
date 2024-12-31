@@ -3,6 +3,8 @@ with-expecter: True
 inpackage: True
 dir: "{{.InterfaceDir}}"
 all: True
+issue-845-fix: True # https://vektra.github.io/mockery/v2.50/deprecations/#issue-845-fix
+resolve-type-alias: False # https://vektra.github.io/mockery/v2.50/deprecations/#resolve-type-alias
 packages:
   github.com/gkatanacio/paraphraser-api/internal/paraphrase:
     config:

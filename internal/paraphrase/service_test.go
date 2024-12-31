@@ -18,7 +18,7 @@ func Test_Service_Paraphrase_Success(t *testing.T) {
 	testResult := "I have a strong appetite. May I know what we are having for dinner?"
 
 	mockParaphraser := &paraphrase.MockParaphraser{}
-	mockParaphraser.On("Paraphrase", mock.Anything, string(testTone), testText).Return(testResult, nil).Once()
+	mockParaphraser.EXPECT().Paraphrase(mock.Anything, string(testTone), testText).Return(testResult, nil).Once()
 
 	service := paraphrase.NewService(
 		&paraphrase.Config{
@@ -53,7 +53,7 @@ func Test_Service_Paraphrase_ParaphraserError(t *testing.T) {
 	testErr := context.DeadlineExceeded
 
 	mockParaphraser := &paraphrase.MockParaphraser{}
-	mockParaphraser.On("Paraphrase", mock.Anything, mock.Anything, mock.Anything).Return("", testErr).Once()
+	mockParaphraser.EXPECT().Paraphrase(mock.Anything, mock.Anything, mock.Anything).Return("", testErr).Once()
 
 	service := paraphrase.NewService(
 		&paraphrase.Config{
