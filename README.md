@@ -81,10 +81,10 @@ $ make deps
 $ make test
 ```
 
-#### run all tests (unit + integration tests)
+#### run all tests (i.e., including integration tests)
 
 ```bash
-$ make testIncludeInt
+$ make testInt
 ```
 
 #### build serverless functions
