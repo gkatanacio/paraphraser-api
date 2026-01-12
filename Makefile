@@ -36,4 +36,5 @@ fmt: .env
 
 .PHONY: mocks
 mocks: .env
-	docker compose run --rm mockery
+	rm -rf mocks/*
+	docker compose run --rm -u $(shell id -u):$(shell id -g) mockery

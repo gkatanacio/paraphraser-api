@@ -6,48 +6,64 @@ import (
 	"log"
 	"strings"
 
-	"github.com/google/generative-ai-go/genai"
-	"google.golang.org/api/option"
+	"google.golang.org/genai"
 )
 
 // Client is the Gemini API client that implements the Paraphraser interface.
 type Client struct {
-	genModel *genai.GenerativeModel
+	genaiClient   *genai.Client
+	genContentCfg *genai.GenerateContentConfig
 }
 
 func NewClient(cfg *Config) *Client {
-	genAiClient, err := genai.NewClient(context.Background(), option.WithAPIKey(cfg.ApiKey))
+	genaiClient, err := genai.NewClient(context.Background(), &genai.ClientConfig{
+		APIKey:  cfg.ApiKey,
+		Backend: genai.BackendGeminiAPI,
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	genModel := genAiClient.GenerativeModel("gemini-1.5-flash")
-	genModel.SetTemperature(cfg.Temperature)
 
-	return &Client{genModel: genModel}
+	genContentCfg := &genai.GenerateContentConfig{
+		SystemInstruction: genai.NewContentFromText(systemPrompt, ""),
+		Temperature:       genai.Ptr(cfg.Temperature),
+	}
+
+	return &Client{
+		genaiClient:   genaiClient,
+		genContentCfg: genContentCfg,
+	}
 }
 
 // Paraphrase builds a prompt to paraphrase the given text to sound more like the given tone
 // and sends the corresponding request to Gemini API.
 func (c *Client) Paraphrase(ctx context.Context, tone string, text string) (string, error) {
-	resp, err := c.genModel.GenerateContent(ctx, genai.Text(buildParaphrasePrompt(tone, text)))
+	resp, err := c.genaiClient.Models.GenerateContent(
+		ctx,
+		"gemini-2.5-flash-lite",
+		genai.Text(buildParaphrasePrompt(tone, text)),
+		c.genContentCfg,
+	)
 	if err != nil {
 		return "", fmt.Errorf("gemini generate content: %w", err)
 	}
 
-	if resp.PromptFeedback != nil && resp.PromptFeedback.BlockReason > 0 {
+	if resp.PromptFeedback != nil && resp.PromptFeedback.BlockReason != "" {
 		return "", fmt.Errorf("prompt was blocked: %s", resp.PromptFeedback.BlockReason)
 	}
 
-	result := fmt.Sprintf("%s", resp.Candidates[0].Content.Parts[0])
-
-	return result, nil
+	return resp.Text(), nil
 }
+
+const systemPrompt = `
+You are an expert paraphraser.
+Your task is to rephrase the given text to match the specified tone while preserving its original meaning.
+Only respond with the paraphrased output.
+`
 
 func buildParaphrasePrompt(tone string, text string) string {
 	return strings.TrimSpace(fmt.Sprintf(`
-	Paraphrase the following text to sound more %s.
-	Only include the actual paraphrased text without surrounding quotes in the response.
-	Try to keep the structure similar to that of the original text.
-	Text: %s
+Tone: %s
+Text: %s
 	`, tone, text))
 }

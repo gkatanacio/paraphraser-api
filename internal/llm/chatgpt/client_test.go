@@ -2,6 +2,7 @@ package chatgpt_test
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -18,4 +19,6 @@ func Test_Client_Paraphrase(t *testing.T) {
 
 	assert.NoError(t, err)
 	assert.NotEmpty(t, result)
+
+	fmt.Printf("chatgpt result: %s", result)
 }

@@ -9,7 +9,7 @@ import (
 // Config contains the configuration for the Gemini API client.
 type Config struct {
 	ApiKey      string  `envconfig:"GEMINI_API_KEY"`
-	Temperature float32 `envconfig:"GEMINI_TEMPERATURE" default:"0.9"`
+	Temperature float32 `envconfig:"GEMINI_TEMPERATURE" default:"0.8"`
 }
 
 // ConfigFromEnv loads the configuration from the environment variables.

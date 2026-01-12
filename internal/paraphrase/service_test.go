@@ -9,6 +9,8 @@ import (
 	"github.com/stretchr/testify/mock"
 
 	"github.com/gkatanacio/paraphraser-api/internal/paraphrase"
+
+	mocksparaphrase "github.com/gkatanacio/paraphraser-api/mocks/paraphrase"
 )
 
 func Test_Service_Paraphrase_Success(t *testing.T) {
@@ -17,7 +19,7 @@ func Test_Service_Paraphrase_Success(t *testing.T) {
 	testText := "I'm hungry. What's for dinner?"
 	testResult := "I have a strong appetite. May I know what we are having for dinner?"
 
-	mockParaphraser := &paraphrase.MockParaphraser{}
+	mockParaphraser := mocksparaphrase.NewMockParaphraser(t)
 	mockParaphraser.EXPECT().Paraphrase(mock.Anything, string(testTone), testText).Return(testResult, nil).Once()
 
 	service := paraphrase.NewService(
@@ -52,7 +54,7 @@ func Test_Service_Paraphrase_ParaphraserError(t *testing.T) {
 	testProvider := paraphrase.ChatGpt
 	testErr := context.DeadlineExceeded
 
-	mockParaphraser := &paraphrase.MockParaphraser{}
+	mockParaphraser := mocksparaphrase.NewMockParaphraser(t)
 	mockParaphraser.EXPECT().Paraphrase(mock.Anything, mock.Anything, mock.Anything).Return("", testErr).Once()
 
 	service := paraphrase.NewService(

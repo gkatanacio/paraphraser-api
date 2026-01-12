@@ -8,8 +8,7 @@ import (
 
 // Config contains the configuration for the ChatGPT API client.
 type Config struct {
-	ApiKey      string  `envconfig:"CHATGPT_API_KEY"`
-	Temperature float32 `envconfig:"CHATGPT_TEMPERATURE" default:"0.9"`
+	ApiKey string `envconfig:"CHATGPT_API_KEY"`
 }
 
 // ConfigFromEnv loads the configuration from the environment variables.

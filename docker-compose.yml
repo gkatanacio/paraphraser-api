@@ -12,14 +12,14 @@ services:
       - GOPATH=/code/.go
 
   serverless:
-    image: gkatanacio/oss-serverless:3.49.0
+    image: gkatanacio/oss-serverless:3.62.0
     volumes:
       - .:/app:cached
     working_dir: /app
     env_file: .env
 
   mockery:
-    image: vektra/mockery:v2
+    image: vektra/mockery:3
     volumes:
       - .:/code:cached
     working_dir: /code
