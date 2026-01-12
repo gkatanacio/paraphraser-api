@@ -6,8 +6,6 @@ import (
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
-
-	"github.com/gkatanacio/paraphraser-api/internal/errs"
 )
 
 // JsonResponse builds the API Gateway Lambda response in JSON format.
@@ -37,7 +35,7 @@ func ErrorResponse(err error) (*events.APIGatewayV2HTTPResponse, error) {
 	body.Error = err.Error()
 
 	var status int
-	var httpErr errs.HttpError
+	var httpErr HttpError
 	switch {
 	case errors.As(err, &httpErr):
 		status = httpErr.StatusCode()

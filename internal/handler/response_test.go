@@ -7,7 +7,6 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/gkatanacio/paraphraser-api/internal/errs"
 	"github.com/gkatanacio/paraphraser-api/internal/handler"
 )
 
@@ -54,7 +53,7 @@ func Test_ErrorResponse(t *testing.T) {
 			wantStatus: 500,
 		},
 		"bad request": {
-			err:        errs.NewBadRequest("invalid input"),
+			err:        handler.NewBadRequest("invalid input"),
 			wantBody:   `{"error":"invalid input"}`,
 			wantStatus: http.StatusBadRequest,
 		},

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
-	"github.com/gkatanacio/paraphraser-api/internal/errs"
 	"github.com/gkatanacio/paraphraser-api/internal/handler"
 	"github.com/gkatanacio/paraphraser-api/internal/llm/chatgpt"
 	"github.com/gkatanacio/paraphraser-api/internal/llm/gemini"
@@ -36,12 +35,12 @@ func handle(ctx context.Context, request *events.APIGatewayV2HTTPRequest) (*even
 	var payload paraphrase.Payload
 	if err := json.Unmarshal([]byte(request.Body), &payload); err != nil {
 		slog.Error(err.Error())
-		return handler.ErrorResponse(errs.NewBadRequest("malformed request body"))
+		return handler.ErrorResponse(handler.NewBadRequest("malformed request body"))
 	}
 
 	if err := payload.Validate(); err != nil {
 		slog.Error(err.Error())
-		return handler.ErrorResponse(errs.NewBadRequest(err.Error()))
+		return handler.ErrorResponse(handler.NewBadRequest(err.Error()))
 	}
 
 	result, err := paraphraseService.Paraphrase(ctx, payload.Provider, payload.Tone, payload.Text)
