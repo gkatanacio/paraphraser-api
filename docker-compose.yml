@@ -12,7 +12,7 @@ services:
       - GOPATH=/code/.go
 
   serverless:
-    image: gkatanacio/oss-serverless:3.62.0
+    image: gkatanacio/oss-serverless:3.62.1
     volumes:
       - .:/app:cached
     working_dir: /app
@@ -23,3 +23,5 @@ services:
     volumes:
       - .:/code:cached
     working_dir: /code
+    environment:
+      - XDG_CACHE_HOME=/code/.cache
